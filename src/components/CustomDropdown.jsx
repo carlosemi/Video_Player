@@ -1,8 +1,9 @@
 import {NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import logo from '../assets/LOGO_ICON.png';
-import { FaUserCircle, FaVideo } from "react-icons/fa";
+import { FaPhotoVideo  } from "react-icons/fa";
 import '../index.css' 
+import { MdVideoCall } from "react-icons/md";
 
 const CustomDropdown = () => {
     return (
@@ -10,9 +11,23 @@ const CustomDropdown = () => {
         title={<img src={logo} alt="User Logo" height="50" />} 
         className="custom-dropdown"
       >
+        <NavDropdown.Item>
+            My videos &nbsp;
+            <FaPhotoVideo 
+                size="1.5em"
+            />
+        
+        </NavDropdown.Item>
+
         <LinkContainer to="/profile">
-          <NavDropdown.Item>Add video <FaVideo /></NavDropdown.Item>
+            <NavDropdown.Item>
+                Add video &nbsp;
+                <MdVideoCall 
+                    size="2em"
+                />
+            </NavDropdown.Item>
         </LinkContainer>
+        
       </NavDropdown>
     );
   }
