@@ -25,24 +25,24 @@ const Video = ({video}) => {
                     className="embed-responsive-item"
                     src={embedUrl}
                     allowFullScreen
-                    title="YouTube video"
+                    title={video.title}
                 ></iframe>
             </div>
         </Link>
         <Card.Body>
             <Link to={`/product/${video.video_url}`}>
                 <Card.Title as='div' className='product-title'>
-                    <strong>Title</strong>
+                    <strong>{video.title}</strong>
                 </Card.Title>
             </Link>
 
             <Card.Text as='div'>
-                User Id
+                {video.user_id}
             </Card.Text>
 
 
             <Card.Text as='h3'>
-                Description
+                {video.description}
             </Card.Text>
         </Card.Body>
     </Card>
