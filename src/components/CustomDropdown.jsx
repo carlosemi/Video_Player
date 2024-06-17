@@ -11,15 +11,18 @@ const CustomDropdown = () => {
         title={<img src={logo} alt="User Logo" height="50" />} 
         className="custom-dropdown"
       >
-        <NavDropdown.Item>
-            My videos &nbsp;
-            <FaPhotoVideo 
-                size="1.5em"
-            />
-        
-        </NavDropdown.Item>
 
-        <LinkContainer to="/profile">
+        <LinkContainer to="/">
+          <NavDropdown.Item>
+              My videos &nbsp;
+              <FaPhotoVideo 
+                  size="1.5em"
+              />
+          
+          </NavDropdown.Item>
+        </LinkContainer>
+        
+        <LinkContainer to="/">
             <NavDropdown.Item>
                 Add video &nbsp;
                 <MdVideoCall 
