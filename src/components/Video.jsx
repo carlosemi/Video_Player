@@ -17,7 +17,7 @@ const Video = ({video}) => {
 
     return (
     <Card className="my-3 rounded border-0">
-        <Link to={`/videos/single/${video.video_url}`}>
+        <Link to={`/video/${video.id}`}>
             <div className="video-container rounded-top">
                 <iframe
                     className="video-frame rounded-top"
@@ -28,8 +28,8 @@ const Video = ({video}) => {
             </div>
         </Link>
         <Card.Body>
-            <Link to={`/product/${video.video_url}`} style={{ color: 'black', textDecoration: 'none' }}>
-                <Card.Title as='div' className='product-title'>
+            <Link to={`/video/${video.id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                <Card.Title as='div' className='video-title'>
                     <strong>{video.title}</strong>
                 </Card.Title>
             </Link>

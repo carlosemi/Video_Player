@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice'
-import { VIDEOS_URL} from '../constants'
+import { VIDEOS_URL, VIDEO_URL} from '../constants'
 
 export const videosApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -17,17 +17,22 @@ export const videosApiSlice = apiSlice.injectEndpoints({
         }),
         editVideo: builder.mutation ({
             query: ({orderId, details}) => ({
-                url: `${VIDEOS_URL}/${orderId}/pay`,
+                url: `${VIDEOS_URL}/`,
                 method: 'PUT',
                 body: details
             })
         }),
-       
+        getVideo: builder.query({
+            query: (id) => ({
+                url: `${VIDEO_URL}/?${id}`
+            })
+        })
     }),
 })
 
 export const {
     useCreateVideoMutation,
     useGetVideosQuery,
-    useEditVideoMutation 
+    useEditVideoMutation,
+    useGetVideoQuery
 } = videosApiSlice;

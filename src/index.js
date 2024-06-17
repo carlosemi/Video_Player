@@ -13,13 +13,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
+import VideoScreen from './screens/VideoScreen'
 import store from './store'; // Import the store
-// import UserEditScreen from './screens/admin/UserEditScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/video/:id" element={<VideoScreen />} />
     </Route>
   )
 );
