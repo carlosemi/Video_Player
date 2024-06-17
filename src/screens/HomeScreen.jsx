@@ -12,7 +12,7 @@ const HomeScreen = () => {
     <>
         {data ? (
           data.videos.map((video) => (
-            <Col key={data._id} xs={6} sm={6} md={6} lg={4} xl={3}>
+            <Col key={video._id} xs={12} sm={12} md={6} lg={6} xl={3}>
                 <Video video={video}/>
             </Col>
           ))

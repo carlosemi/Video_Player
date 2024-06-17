@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa";
 
 const Video = ({video}) => {
-
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    console.log("Video video: " + video)
 
      // Function to extract the YouTube video ID from the URL
     const getYouTubeEmbedUrl = (url) => {
@@ -18,11 +16,11 @@ const Video = ({video}) => {
   const embedUrl = getYouTubeEmbedUrl(video.video_url);
 
     return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 rounded border-0">
         <Link to={`/videos/single/${video.video_url}`}>
-            <div className="embed-responsive embed-responsive-16by9 mb-3">
+            <div className="video-container rounded-top">
                 <iframe
-                    className="embed-responsive-item"
+                    className="video-frame rounded-top"
                     src={embedUrl}
                     allowFullScreen
                     title={video.title}
@@ -30,20 +28,19 @@ const Video = ({video}) => {
             </div>
         </Link>
         <Card.Body>
-            <Link to={`/product/${video.video_url}`}>
+            <Link to={`/product/${video.video_url}`} style={{ color: 'black', textDecoration: 'none' }}>
                 <Card.Title as='div' className='product-title'>
                     <strong>{video.title}</strong>
                 </Card.Title>
             </Link>
 
             <Card.Text as='div'>
-                {video.user_id}
+                <FaUserCircle />  {video.user_id}
             </Card.Text>
 
-
-            <Card.Text as='h3'>
+            {/* <Card.Text as='h3'>
                 {video.description}
-            </Card.Text>
+            </Card.Text> */}
         </Card.Body>
     </Card>
   )
