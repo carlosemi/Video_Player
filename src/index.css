@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.custom-dropdown .dropdown-toggle::after {
+  content: '';
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  border: .3em solid transparent;
+  border-top-color: #000; /* Change this to the color you want for the arrow */
+}
+
+.custom-dropdown .dropdown-toggle {
+  color: #000; /* Adjust text color if necessary */
+}
