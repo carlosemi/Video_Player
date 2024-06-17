@@ -12,7 +12,7 @@ export const videosApiSlice = apiSlice.injectEndpoints({
         }),
         getVideos: builder.query({
             query: (user_id) => ({
-                url: `${VIDEOS_URL}/${user_id}`,
+                url: `${VIDEOS_URL}/?user_id=Carlos%20Guerra`,
             }),
         }),
         editVideo: builder.mutation ({
@@ -25,3 +25,9 @@ export const videosApiSlice = apiSlice.injectEndpoints({
        
     }),
 })
+
+export const {
+    useCreateVideoMutation,
+    useGetVideosQuery,
+    useEditVideoMutation 
+} = videosApiSlice;
