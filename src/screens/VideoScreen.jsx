@@ -31,6 +31,13 @@ const VideoScreen = () => {
             allowFullScreen
             title={data.video.title}
           ></iframe>
+          <div className="video-details-container">
+            <div className="video-details">
+              <h2 className="video-title">{data.video.title}</h2>
+              <p className="video-user">Uploaded by {data.video.user_id}</p>
+              <p className="video-description">{data.video.description}</p>
+            </div>
+          </div>
         </div>
       ) : (
         <div>Invalid video URL</div>
@@ -40,3 +47,4 @@ const VideoScreen = () => {
 }
 
 export default VideoScreen;
+
