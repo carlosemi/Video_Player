@@ -1,38 +1,42 @@
-import {useState} from 'react';
-import { useParams, useNavigate } from "react-router-dom";
-import {Link} from 'react-router-dom';
-import {Form, Row, Col, Image, ListGroup, Card, Button, Badge} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { useGetVideoQuery } from "../slices/videosApiSlice";
-import {toast} from 'react-toastify';
 
 const VideoScreen = () => {
+  const { id: videoId } = useParams();
 
-    const { id: videoId } = useParams();
+  const { data, isLoading, error } = useGetVideoQuery(videoId);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  // Function to extract the YouTube video ID from the URL
+  const getYouTubeEmbedUrl = (url) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/videos\/|embed\/|shorts\/|youtube.com\/clip\/|https:\/\/m.youtube.com\/watch\?v=|&clip=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
+  };
 
-    const { data: product, isLoading, error, refetch} = useGetVideoQuery(videoId);
+  // Call getYouTubeEmbedUrl only if data is available
+  const embedUrl = data && data.video.video_url ? getYouTubeEmbedUrl(data.video.video_url) : null;
 
-    // const [createComment] = useCreateCommentMutation();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
-    // const submitHandler = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await createComment(text).unwrap();
-    //         toast.success('Comment Added');
-    //         refetch();
-    //     } catch (err) {
-    //         toast.error(err?.data?.message || err.error);
-    //     }
-    // };
-
-    return (
-        <>
-             Testing Video Screen
-        </>
-    )
+  return (
+    <>
+      {embedUrl ? (
+        <div className="video-screen-container">
+          <iframe
+            className="video-screen-frame"
+            src={embedUrl}
+            allowFullScreen
+            title={data.video.title}
+          ></iframe>
+        </div>
+      ) : (
+        <div>Invalid video URL</div>
+      )}
+    </>
+  );
 }
 
-export default VideoScreen
+export default VideoScreen;

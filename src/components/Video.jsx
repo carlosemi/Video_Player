@@ -13,7 +13,7 @@ const Video = ({video}) => {
         return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
     };
 
-  const embedUrl = getYouTubeEmbedUrl(video.video_url);
+    const embedUrl = getYouTubeEmbedUrl(video.video_url);
 
     return (
     <Card className="my-3 rounded border-0">

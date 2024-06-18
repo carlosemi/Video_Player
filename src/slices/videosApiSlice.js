@@ -16,15 +16,15 @@ export const videosApiSlice = apiSlice.injectEndpoints({
             }),
         }),
         editVideo: builder.mutation ({
-            query: ({orderId, details}) => ({
+            query: ({ details}) => ({
                 url: `${VIDEOS_URL}/`,
                 method: 'PUT',
                 body: details
             })
         }),
         getVideo: builder.query({
-            query: (id) => ({
-                url: `${VIDEO_URL}/?${id}`
+            query: (videoId) => ({
+                url: `${VIDEOS_URL}/single?video_id=${videoId}`
             })
         })
     }),
