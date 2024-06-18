@@ -12,8 +12,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
 import HomeScreen from './screens/HomeScreen';
 import VideoScreen from './screens/VideoScreen'
+import EditVideoScreen from './screens/EditVideoScreen'
+import AddVideoScreen from './screens/AddVideoScreen';
+
 import store from './store'; // Import the store
 
 const router = createBrowserRouter(
@@ -21,6 +25,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/video/:id" element={<VideoScreen />} />
+      <Route path="/editVideo/:id" element={<EditVideoScreen />} />
+      <Route path="/addVideo" element={<AddVideoScreen />} />
     </Route>
   )
 );

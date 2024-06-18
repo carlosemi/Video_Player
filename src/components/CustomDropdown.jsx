@@ -20,7 +20,7 @@ const CustomDropdown = () => {
           </NavDropdown.Item>
         </LinkContainer>
         
-        <LinkContainer to="/">
+        <LinkContainer to="/addVideo">
             <NavDropdown.Item>
                 Add video &nbsp;
                 <MdVideoCall 
