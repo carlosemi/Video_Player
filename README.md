@@ -85,6 +85,7 @@ web-vitals
 ## Folder Structure
 The project structure is as follows:
 
+```bash
 video_player
 │
 ├── node_modules
@@ -122,6 +123,7 @@ video_player
 ├── package-lock.json
 ├── package.json
 └── README.md
+```
 
 ## Screenshots
 
