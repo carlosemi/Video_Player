@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice'
-import { VIDEOS_URL, VIDEO_URL} from '../constants'
+import { VIDEOS_URL, VIDEO_URL, COMMENT_URL} from '../constants'
 
 export const videosApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -26,6 +26,11 @@ export const videosApiSlice = apiSlice.injectEndpoints({
             query: (videoId) => ({
                 url: `${VIDEOS_URL}/single?video_id=${videoId}`
             })
+        }),
+        getComments: builder.query({
+            query: (videoId) => ({
+                url: `${COMMENT_URL}?video_id=${videoId}`
+            })
         })
     }),
 })
@@ -34,5 +39,6 @@ export const {
     useCreateVideoMutation,
     useGetVideosQuery,
     useEditVideoMutation,
-    useGetVideoQuery
+    useGetVideoQuery,
+    useGetCommentsQuery
 } = videosApiSlice;

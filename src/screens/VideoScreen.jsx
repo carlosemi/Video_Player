@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { useGetVideoQuery } from "../slices/videosApiSlice";
+import { useGetVideoQuery, useGetCommentsQuery } from "../slices/videosApiSlice";
 import { IoMdSettings } from "react-icons/io";
-
+import { Row, Col, ListGroup} from 'react-bootstrap';
+import { FaUserCircle } from "react-icons/fa";
 
 const VideoScreen = () => {
   const { id: videoId } = useParams();
 
   const { data, isLoading, error } = useGetVideoQuery(videoId);
+  const { data: commentsData, isLoading: commentsLoading, error: commentsError } = useGetCommentsQuery(videoId);
 
   // Function to extract the YouTube video ID from the URL
   const getYouTubeEmbedUrl = (url) => {
@@ -23,14 +25,19 @@ const VideoScreen = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const { comments = [] } = commentsData || {}; //Destructuring comments
+
+//   console.log(comments[0].content)
+
   return (
     <>
       {embedUrl ? (
         <>
-        <Link to={`/editVideo/${videoId}`}>
+        <Link to={`/editVideo/${videoId}`} className='align-items-center'>
             <IoMdSettings 
-            className='justify-content-right mb-2'
+            className='align-items-center mb-2'
             size="1.5em"
+            color="black"
             />
         </Link>
         <div className="video-screen-container">
@@ -41,13 +48,37 @@ const VideoScreen = () => {
             allowFullScreen
             title={data.video.title}
           ></iframe>
-          <div className="video-details-container">
-            <div className="video-details">
-              <h2 className="video-title">{data.video.title}</h2>
-              <p className="video-user">Uploaded by {data.video.user_id}</p>
-              <p className="video-description">{data.video.description}</p>
+        </div>
+
+        <div className="video-details-container">
+            <div className="">
+              <h4 className="">{data.video.title}</h4>
+              <p className="">  Uploaded by {data.video.user_id}</p>
+              <p className="">{data.video.description}</p>
             </div>
-          </div>
+        </div>
+
+        <hr></hr>
+
+        <div>
+            <p className='mb-3'>Comments</p>
+            {comments.length > 0 ? (
+                <Row className='comment-section'>
+                    <Col md={6}>
+                        {comments.map((comment) => (
+                            <ListGroup.Item key={comment._id}>
+                                <div className="mt-2">
+                                    <FaUserCircle /> @{comment.user_id}
+                                    <p>{comment.content}</p>
+                                </div>
+                            </ListGroup.Item>
+                        ))}
+                    </Col>
+                </Row>
+            ) : (
+                <p>No comments</p>
+            )}
+            
         </div>
         </>
       ) : (
