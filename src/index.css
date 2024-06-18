@@ -18,7 +18,7 @@ html, body {
 }
 
 main{
-  min-height: 65vh;
+  min-height: 67vh;
 }
 
 code {
@@ -26,17 +26,9 @@ code {
     monospace;
 }
 
-.custom-dropdown .dropdown-toggle::after {
-  content: '';
-  display: inline-block;
-  margin-left: .255em;
-  vertical-align: .255em;
-  border: .3em solid transparent;
-  border-top-color: #000; 
-}
 
-.custom-dropdown .dropdown-toggle {
-  color: #000; 
+.dropdown-toggle::after,::before {
+  display: none !important; 
 }
 
 .video-container {

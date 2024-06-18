@@ -8,18 +8,16 @@ const Header = () => {
         <header>
             <Navbar bg="white" variant="light" expand="md" collapseOnSelect>
             <Container>
-                
-                <Navbar bg="" variant="dark" expand="lg">
-                    <Navbar.Brand href="/">
+                <Navbar.Brand href="/">
+                    <img src={logo} height="50"/>
+                </Navbar.Brand>
+                {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ml-auto">
                         
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto">
-                            <CustomDropdown />
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
+                    </Nav>
+                </Navbar.Collapse> */}
+                <CustomDropdown />
                 
             </Container>
             </Navbar>
