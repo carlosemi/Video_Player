@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetVideoQuery } from "../slices/videosApiSlice";
+import { IoMdSettings } from "react-icons/io";
+
 
 const VideoScreen = () => {
   const { id: videoId } = useParams();
@@ -24,7 +26,15 @@ const VideoScreen = () => {
   return (
     <>
       {embedUrl ? (
+        <>
+        <Link to={`/editVideo/${videoId}`}>
+            <IoMdSettings 
+            className='justify-content-right mb-2'
+            size="1.5em"
+            />
+        </Link>
         <div className="video-screen-container">
+            
           <iframe
             className="video-screen-frame"
             src={embedUrl}
@@ -39,6 +49,7 @@ const VideoScreen = () => {
             </div>
           </div>
         </div>
+        </>
       ) : (
         <div>Invalid video URL</div>
       )}
@@ -47,4 +58,3 @@ const VideoScreen = () => {
 }
 
 export default VideoScreen;
-

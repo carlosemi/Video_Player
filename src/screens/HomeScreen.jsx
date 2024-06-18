@@ -1,12 +1,15 @@
 import { useGetVideosQuery } from '../slices/videosApiSlice';
 import Video from '../components/Video'
 import { Col, Row } from 'react-bootstrap';
+import { useEffect } from 'react';
 
 const HomeScreen = () => {
 
-  const { data, error} = useGetVideosQuery();
+  const { data, refetch, error} = useGetVideosQuery();
 
-  console.log({data})
+  useEffect(() => {
+    refetch()
+  })
 
   return (
     <>
