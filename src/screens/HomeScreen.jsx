@@ -9,7 +9,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     refetch()
-  })
+  }, [refetch])
 
   return (
     <>

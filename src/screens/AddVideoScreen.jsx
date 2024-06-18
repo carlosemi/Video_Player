@@ -12,7 +12,7 @@ const AddVideoScreen = () => {
     const [user_id, setId] = useState('')
 
     const [createVideo, video, isLoading] = useCreateVideoMutation()
-
+    
     const navigate = useNavigate()
 
     useEffect(() =>{
