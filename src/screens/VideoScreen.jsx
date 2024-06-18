@@ -1,33 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { useGetVideoQuery, useGetCommentsQuery } from "../slices/videosApiSlice";
+import { useGetVideoQuery, useGetCommentsQuery, useCreateCommentMutation } from "../slices/videosApiSlice";
 import { HiDotsVertical } from "react-icons/hi";
 import { Row, Col, ListGroup, Form, Button} from 'react-bootstrap';
 import { FaUserCircle } from "react-icons/fa";
+import {toast} from 'react-toastify'
 
 const VideoScreen = () => {
-  const { id: videoId } = useParams();
+    const { id: videoId } = useParams();
 
-  const { data, isLoading, error } = useGetVideoQuery(videoId);
-  const { data: commentsData, isLoading: commentsLoading, error: commentsError } = useGetCommentsQuery(videoId);
+    const { data, isLoading, error } = useGetVideoQuery(videoId);
+    const { data: commentsData, refetch, isLoading: commentsLoading, error: commentsError } = useGetCommentsQuery(videoId);
 
-  // Function to extract the YouTube video ID from the URL
-  const getYouTubeEmbedUrl = (url) => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/videos\/|embed\/|shorts\/|youtube.com\/clip\/|https:\/\/m.youtube.com\/watch\?v=|&clip=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
-  };
+    const [comment, setComment] = useState('');
+    const [createComment, {isLoading: loadingComment}] = useCreateCommentMutation();
 
-  // Call getYouTubeEmbedUrl only if data is available
-  const embedUrl = data && data.video.video_url ? getYouTubeEmbedUrl(data.video.video_url) : null;
+    const user_id = "Carlos_Guerra"
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+    // Function to extract the YouTube video ID from the URL
+    const getYouTubeEmbedUrl = (url) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/videos\/|embed\/|shorts\/|youtube.com\/clip\/|https:\/\/m.youtube.com\/watch\?v=|&clip=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
+    };
 
-  const { comments = [] } = commentsData || {}; //Destructuring comments
+    // Call getYouTubeEmbedUrl only if data is available
+    const embedUrl = data && data.video.video_url ? getYouTubeEmbedUrl(data.video.video_url) : null;
 
-  return (
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+
+    const { comments = [] } = commentsData || {}; //Destructuring comments
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            await createComment({video_id: videoId, content: comment, user_id}).unwrap();
+            toast.success('Comment Added');
+            setComment('');
+            refetch();
+        } catch (err) {
+            toast.error(err?.data?.message || err.error);
+        }
+    };
+
+
+    return (
     <>
       {embedUrl ? (
         <div className="video-container">
@@ -64,8 +83,9 @@ const VideoScreen = () => {
                 as="textarea"
                 placeholder="Add a comment"
                 className="comment-form"
+                onChange={(e) => setComment(e.target.value)}
               />
-              <Button variant="primary" className="ml-2">
+              <Button variant="primary" className="ml-2" onClick={submitHandler}>
                 Comment
               </Button>
             </div>
