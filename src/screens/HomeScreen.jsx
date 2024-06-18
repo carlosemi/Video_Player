@@ -3,6 +3,7 @@ import Video from '../components/Video'
 import { Col, Row } from 'react-bootstrap';
 import { useEffect } from 'react';
 import Spinner from '../components/Loader'
+
 const HomeScreen = () => {
 
   const { data, refetch, error} = useGetVideosQuery();
