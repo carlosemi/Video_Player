@@ -27,8 +27,6 @@ const VideoScreen = () => {
 
   const { comments = [] } = commentsData || {}; //Destructuring comments
 
-//   console.log(comments[0].content)
-
   return (
     <>
       {embedUrl ? (
@@ -40,8 +38,8 @@ const VideoScreen = () => {
             color="black"
             />
         </Link>
+
         <div className="video-screen-container">
-            
           <iframe
             className="video-screen-frame"
             src={embedUrl}
@@ -62,6 +60,8 @@ const VideoScreen = () => {
 
         <div>
             <p className='mb-3'>Comments</p>
+
+            <p> <FaUserCircle /> Add a comment</p>
             {comments.length > 0 ? (
                 <Row className='comment-section'>
                     <Col md={6}>
