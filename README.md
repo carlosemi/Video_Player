@@ -14,57 +14,149 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Video Player Platform
+### Overview
+The Video Player Platform is an educational video sharing application that allows users to upload, view, and comment on videos. The platform leverages YouTube URLs to display videos through an iframe. Key features include:
 
-### `npm run build`
+Home logo redirects to the home screen.
+A menu bar button provides options to add a video or return to the home screen.
+Video cards display YouTube videos and redirect to a detailed view when clicked.
+Detailed video view includes video playback, comments, and an option to add comments.
+Edit option available for videos in the detailed view.
+Responsive design ensures usability on various screen sizes.
+Features
+Home Screen: Displays all uploaded videos as cards.
+Video Upload: Allows users to add new videos using YouTube URLs.
+Video Detail View: Shows the video in a larger view with comments and an option to add new comments.
+Edit Video: Users can edit video details like title and description.
+Responsive Design: Adapts to different screen sizes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation and Setup
+### Prerequisites
+Node.js
+npm (Node package manager)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
+Clone the repository:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/carlosemi/Video_Player.git
+cd video_player
+```
 
-### `npm run eject`
+### Install the dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Running the Application
+Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Open your browser and navigate to:
+http://localhost:3000
 
-## Learn More
+## Dependencies
+@reduxjs/toolkit
+@testing-library/jest-dom
+@testing-library/react
+@testing-library/user-event
+axios
+bootstrap
+mdb-react-ui-kit
+react
+react-bootstrap
+react-dom
+react-helmet-async
+react-icons
+react-redux
+react-router-bootstrap
+react-router-dom
+react-scripts
+react-toastify
+redux
+web-vitals
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Folder Structure
+The project structure is as follows:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+video_player
+│
+├── node_modules
+├── public
+├── src
+│   ├── assets
+│   │   ├── FULL_LOGO_COLOR.png
+│   │   ├── FULL_LOGO_DARK.png
+│   │   ├── FULL_LOGO_WHITE.png
+│   │   ├── LOGO_ICON.png
+│   ├── components
+│   │   ├── CustomDropdown.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── Loader.jsx
+│   │   ├── Video.jsx
+│   ├── screens
+│   │   ├── AddVideoScreen.jsx
+│   │   ├── EditVideoScreen.jsx
+│   │   ├── HomeScreen.jsx
+│   │   ├── VideoScreen.jsx
+│   ├── slices
+│   │   ├── apiSlice.js
+│   │   ├── videosApiSlice.js
+│   ├── App.js
+│   ├── App.css
+│   ├── constants.js
+│   ├── index.js
+│   ├── index.css
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   ├── setupTests.js
+│   ├── store.js
+├── .gitignore
+├── package-lock.json
+├── package.json
+└── README.md
 
-### Code Splitting
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Home Screen
+![Screenshot of home screen](./mdimages/HomeScreen.png)
 
-### Analyzing the Bundle Size
+### Video Screen
+![Screenshot of video screen](./mdimages/VideoScreen.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Edit Video Screen
+![Screenshot of edit video screen](./mdimages/EditVideo.png)
 
-### Making a Progressive Web App
+### Menu
+![Screenshot of menu button](./mdimages/Menu.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Add Video Screen
+![Screenshot of add video screen](./mdimages/AddVideo.png)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Additional Information
+### Home Screen
+The home screen displays all videos in a grid format.
+Clicking on a video card navigates to the video detail screen.
 
-### Deployment
+### Video Screen
+The video detail screen shows the video, comments, and an option to add comments.
+Users can click on the settings icon to edit the video details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Add Video
+Users can add a new video by providing the title, YouTube URL, description, and user ID.
 
-### `npm run build` fails to minify
+### Edit Video
+Users can edit the video title and description from the video detail screen.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Footer
+The footer contains dummy links to About Us, Contact Us, and Follow Us sections.
+
+For any issues or feature requests, please open an issue in the repository.
