@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useGetVideoQuery, useGetCommentsQuery } from "../slices/videosApiSlice";
-import { IoMdSettings } from "react-icons/io";
-import { Row, Col, ListGroup} from 'react-bootstrap';
+import { HiDotsVertical } from "react-icons/hi";
+import { Row, Col, ListGroup, Form, Button} from 'react-bootstrap';
 import { FaUserCircle } from "react-icons/fa";
 
 const VideoScreen = () => {
@@ -30,57 +30,65 @@ const VideoScreen = () => {
   return (
     <>
       {embedUrl ? (
-        <>
-        <Link to={`/editVideo/${videoId}`} className='align-items-center'>
-            <IoMdSettings 
-            className='align-items-center mb-2'
-            size="1.5em"
-            color="black"
-            />
-        </Link>
+        <div className="video-container">
+          <Row>
+            <Col className="d-flex justify-content-end mb-2">
+              <Link to={`/editVideo/${videoId}`}>
+                <HiDotsVertical size="1.5em" color="black" />
+              </Link>
+            </Col>
+          </Row>
 
-        <div className="video-screen-container">
-          <iframe
-            className="video-screen-frame"
-            src={embedUrl}
-            allowFullScreen
-            title={data.video.title}
-          ></iframe>
-        </div>
+          <div className="video-frame-container">
+            <iframe
+              className="video-frame"
+              src={embedUrl}
+              allowFullScreen
+              title={data.video.title}
+            ></iframe>
+          </div>
 
-        <div className="video-details-container">
-            <div className="">
-              <h4 className="">{data.video.title}</h4>
-              <p className="">  Uploaded by {data.video.user_id}</p>
-              <p className="">{data.video.description}</p>
+          <div className="video-details-container">
+            <h4 className="video-title">{data.video.title}</h4>
+            <p className="video-user">Uploaded by {data.video.user_id}</p>
+            <p className="video-description">{data.video.description}</p>
+          </div>
+
+          <hr />
+
+          <div className="comment-section">
+            <h5>Comments</h5>
+            <div className="mb-3 d-flex align-items-center">
+              <FaUserCircle size="2.5em" />
+              <Form.Control
+                as="textarea"
+                placeholder="Add a comment"
+                className="comment-form"
+              />
+              <Button variant="primary" className="ml-2">
+                Comment
+              </Button>
             </div>
-        </div>
 
-        <hr></hr>
-
-        <div>
-            <p className='mb-3'>Comments</p>
-
-            <p> <FaUserCircle /> Add a comment</p>
             {comments.length > 0 ? (
-                <Row className='comment-section'>
-                    <Col md={6}>
-                        {comments.map((comment) => (
-                            <ListGroup.Item key={comment._id}>
-                                <div className="mt-2">
-                                    <FaUserCircle /> @{comment.user_id}
-                                    <p>{comment.content}</p>
-                                </div>
-                            </ListGroup.Item>
-                        ))}
-                    </Col>
-                </Row>
+              <ListGroup>
+                {comments.map((comment) => (
+                  <ListGroup.Item key={comment._id} className="comment-item">
+                    <div className="d-flex align-items-center">
+                      <FaUserCircle size="2em" className="comment-icon" />
+                      <div>
+                        <p className="comment-content"><strong>@{comment.user_id}</strong></p>
+                        <p>{comment.content}</p>
+                      </div>
+                    </div>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
             ) : (
-                <p>No comments</p>
+              <p>No comments</p>
             )}
-            
+          </div>
         </div>
-        </>
       ) : (
         <div>Invalid video URL</div>
       )}
